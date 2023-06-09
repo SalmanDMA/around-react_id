@@ -1,0 +1,35 @@
+.form {
+ position: fixed;
+ background-color: #fff;
+ border-radius: 10px;
+ display: none;
+ animation-name: slideInDown;
+ animation-duration: 0.5s;
+ animation-fill-mode: both;
+ transition: opacity 0.5s ease;
+ opacity: 1;
+ z-index: 3;
+ width: 385px;
+}
+
+.form.close {
+ opacity: 0;
+}
+
+@media screen and (max-width: 320px) {
+ .form {
+  width: 282px;
+  height: 322px;
+  top: 60%;
+ }
+}
+
+@keyframes slideInDown {
+ 0% {
+  top: -100%;
+  visibility: visible;
+ }
+ 100% {
+  top: 20%;
+ }
+}
