@@ -12,7 +12,6 @@ export default function Main(props) {
 
  useEffect(() => {
   api.getInitialCardsAndUserInfo().then(([cards, data]) => {
-   console.log(cards);
    setUserName(data.name);
    setUserDescription(data.about);
    setUserAvatar(data.avatar);
