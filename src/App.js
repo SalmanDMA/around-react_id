@@ -31,11 +31,6 @@ function App() {
  const [isLoading, setIsLoading] = useState(false);
  const [buttonDisabled, setButtonDisabled] = useState(false);
  const { name, about, avatar } = currentUser || {};
- // Membuat variabel untuk provider konteks
- const currentUserProvider = {
-  currentUser,
-  setCurrentUser,
- };
 
  useEffect(() => {
   const fetchUserInfo = async () => {
