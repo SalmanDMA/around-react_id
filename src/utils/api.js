@@ -90,8 +90,8 @@ class Api {
     method: 'PATCH',
     headers: this.headers,
     body: JSON.stringify({
-     name: data.inputName,
-     about: data.inputJob,
+     name: data.name,
+     about: data.about,
     }),
    });
 
@@ -109,7 +109,7 @@ class Api {
     method: 'PATCH',
     headers: this.headers,
     body: JSON.stringify({
-     avatar: url,
+     avatar: url.avatar,
     }),
    });
 

@@ -6,7 +6,7 @@
  height: 20px;
 }
 
-.toggle {
+.card__icon_active {
  margin-right: 21px;
  margin-left: 10px;
  background: url('../../.././images/icon/heartBlack.svg') no-repeat;

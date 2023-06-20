@@ -10,6 +10,10 @@ Around the US is a web application that displays a set of cards with interesting
 - Feature to change the user avatar
 - ability to open a popup to view cards in detail
 
+## Tech
+
+- React JS with CRA Temmplate
+
 ## Installation
 
 Here are the steps to run the app locally:

@@ -2,7 +2,7 @@
  width: 430px;
  height: 272px;
  padding: 0 36px;
- transform: translateY(30%);
+ transform: translateX(-50%);
 }
 
 .form-avatar.block {
