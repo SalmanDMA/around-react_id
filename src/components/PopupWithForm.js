@@ -1,20 +1,15 @@
-import { useRef } from 'react';
-
 export default function PopupWithForm(props) {
- const formContainerRef = useRef(null);
- const overlay = useRef(null);
-
  const handleOverlayClick = (e) => {
-  if (!formContainerRef.current.contains(e.target) && overlay.current.contains(e.target)) return props.onClose();
+  if (!props.refFormContainer.current.contains(e.target) && props.refOverlay.current.contains(e.target)) return props.onClose();
  };
 
  const handleOverlayMouseOver = (e) => {
-  formContainerRef.current.contains(e.target) ? (overlay.current.style.cursor = 'default') : (overlay.current.style.cursor = 'pointer');
+  props.refFormContainer.current.contains(e.target) ? (props.refOverlay.current.style.cursor = 'default') : (props.refOverlay.current.style.cursor = 'pointer');
  };
 
  return (
-  <div ref={overlay} className={`overlay ${props.isOpen ? 'block' : ''}`} onClick={handleOverlayClick} onMouseOver={handleOverlayMouseOver}>
-   <div ref={formContainerRef} className={`form ${props.name} ${props.isOpen ? 'block' : ''}`}>
+  <div ref={props.refOverlay} className={`overlay ${props.isOpen ? 'block' : ''}`} onClick={handleOverlayClick} onMouseOver={handleOverlayMouseOver}>
+   <div ref={props.refFormContainer} className={`form ${props.name} ${props.isOpen ? 'block' : ''}`}>
     {props.name === 'form-confirm-container' ? (
      <>
       <button className='form__icon hover' onClick={props.onClose}></button>

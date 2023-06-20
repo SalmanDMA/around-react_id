@@ -2,7 +2,17 @@ import PopupWithForm from './PopupWithForm';
 
 export default function AddPlacepopup(props) {
  return (
-  <PopupWithForm name='form-add' title='Tempat Baru' titleClass='form__header' isOpen={props.isOpen} onClose={props.onClose} onSubmit={props.onSubmit} refFormElement={props.refFormElement}>
+  <PopupWithForm
+   name='form-add'
+   title='Tempat Baru'
+   titleClass='form__header'
+   isOpen={props.isOpen}
+   onClose={props.onClose}
+   onSubmit={props.onSubmit}
+   refFormElement={props.refFormElement}
+   refFormContainer={props.refFormContainer}
+   refOverlay={props.refOverlay}
+  >
    <input
     id='text-input-tiga'
     type='text'

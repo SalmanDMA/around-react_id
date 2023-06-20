@@ -24,6 +24,8 @@ function App() {
  const refFormAddPlaceElement = useRef();
  const refFormAvatarElement = useRef();
  const refFormProfileElement = useRef();
+ const refFormContainer = useRef();
+ const refOverlay = useRef();
  const [cardList, setCardList] = useState([]);
  const [deletingCard, setDeletingCard] = useState(null);
  const [isLoading, setIsLoading] = useState(false);
@@ -247,6 +249,8 @@ function App() {
       selectedCard={selectedCard}
       isDeleteConfirmPopupOpen={isDeleteConfirmPopupOpen}
       isLoading={isLoading}
+      refFormContainer={refFormContainer}
+      refOverlay={refOverlay}
      />
      <EditProfilePopup
       isOpen={isEditProfilePopupOpen}
@@ -259,6 +263,8 @@ function App() {
       refFormElement={refFormProfileElement}
       isLoading={isLoading}
       validateInput={validateInput}
+      refFormContainer={refFormContainer}
+      refOverlay={refOverlay}
      />
      <AddPlacepopup
       isOpen={isAddPlacePopupOpen}
@@ -271,6 +277,8 @@ function App() {
       refFormElement={refFormAddPlaceElement}
       isLoading={isLoading}
       validateInput={validateInput}
+      refFormContainer={refFormContainer}
+      refOverlay={refOverlay}
      />
      <EditAvatarPopup
       isOpen={isEditAvatarPopupOpen}
@@ -282,6 +290,8 @@ function App() {
       refFormElement={refFormAvatarElement}
       isLoading={isLoading}
       validateInput={validateInput}
+      refFormContainer={refFormContainer}
+      refOverlay={refOverlay}
      />
      <Footer />
     </CurrentUserContext.Provider>

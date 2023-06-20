@@ -30,13 +30,21 @@ export default function Main(props) {
     </div>
    </section>
 
-   <PopupWithForm name='form-confirm-container' title='Apakah Anda Yakin ?' isOpen={props.isDeleteConfirmPopupOpen} onClose={props.onCloseAllPopups} titleClass='form-confirm-container__title'>
+   <PopupWithForm
+    name='form-confirm-container'
+    title='Apakah Anda Yakin ?'
+    isOpen={props.isDeleteConfirmPopupOpen}
+    onClose={props.onCloseAllPopups}
+    titleClass='form-confirm-container__title'
+    refFormContainer={props.refFormContainer}
+    refOverlay={props.refOverlay}
+   >
     <button type='submit' className='form__button form-confirm-container__button hover-icon' aria-label='Ya' onClick={props.onDeleteCard}>
      {props.isLoading ? 'Deleting...' : 'Ya'}
     </button>
    </PopupWithForm>
 
-   <ImagePopup isOpen={props.selectedCard} card={props.selectedCard} onClose={props.onCloseAllPopups} />
+   <ImagePopup isOpen={props.selectedCard} card={props.selectedCard} onClose={props.onCloseAllPopups} refFormContainer={props.refFormContainer} refOverlay={props.refOverlay} />
 
    <section className='card'>
     {props.cardList.map((card) => (

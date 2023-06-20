@@ -2,7 +2,7 @@
  position: absolute;
  top: -18%;
  right: -7%;
- background: url('../../../images/icon/CloseIcon.png') no-repeat;
+ background: url(../../../../public/images/icon/CloseIcon.png) no-repeat;
  background-size: cover;
  width: 30px;
  height: 30px;

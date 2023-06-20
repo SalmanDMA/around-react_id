@@ -2,7 +2,17 @@ import PopupWithForm from './PopupWithForm';
 
 export default function EditAvatarPopup(props) {
  return (
-  <PopupWithForm name='form-avatar' title='Ubah Foto Profil' titleClass='form-avatar__title' isOpen={props.isOpen} onClose={props.onClose} onSubmit={props.onSubmit} refFormElement={props.refFormElement}>
+  <PopupWithForm
+   name='form-avatar'
+   title='Ubah Foto Profil'
+   titleClass='form-avatar__title'
+   isOpen={props.isOpen}
+   onClose={props.onClose}
+   onSubmit={props.onSubmit}
+   refFormElement={props.refFormElement}
+   refFormContainer={props.refFormContainer}
+   refOverlay={props.refOverlay}
+  >
    <input
     id='input-url-avatar'
     name='inputAvatar'

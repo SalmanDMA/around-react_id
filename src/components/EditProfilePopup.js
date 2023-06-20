@@ -29,7 +29,17 @@ export default function EditProfilePopup(props) {
  };
 
  return (
-  <PopupWithForm isOpen={props.isOpen} onClose={props.onClose} title='Edit profile' name='form-edit' titleClass='form__header' onSubmit={handleSubmit} refFormElement={props.refFormElement}>
+  <PopupWithForm
+   isOpen={props.isOpen}
+   onClose={props.onClose}
+   title='Edit profile'
+   name='form-edit'
+   titleClass='form__header'
+   onSubmit={handleSubmit}
+   refFormElement={props.refFormElement}
+   refFormContainer={props.refFormContainer}
+   refOverlay={props.refOverlay}
+  >
    <input
     id='text-input'
     type='text'

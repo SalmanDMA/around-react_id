@@ -27,3 +27,7 @@ Here are the steps to run the app locally:
 4. Install the required dependencies.
 
 5. Run the application (npm run start).
+
+## Project Prview
+
+![detailProject](./public/images/project/detailProject.PNG 'detailProject')
