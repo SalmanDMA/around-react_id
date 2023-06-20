@@ -30,7 +30,8 @@ function App() {
  const [deletingCard, setDeletingCard] = useState(null);
  const [isLoading, setIsLoading] = useState(false);
  const [buttonDisabled, setButtonDisabled] = useState(false);
- const { name, about, avatar } = currentUser || {};
+ const [nameProfile, setNameProfile] = useState('');
+ const [aboutProfile, setAboutProfile] = useState('');
 
  useEffect(() => {
   const fetchUserInfo = async () => {
@@ -75,10 +76,10 @@ function App() {
  };
 
  const handleUpdateUser = (userInfo) => {
-  const { name, about } = userInfo;
+  const { nameProfile, aboutProfile } = userInfo;
   setIsLoading(true);
   api
-   .patchUserInfo({ name, about })
+   .patchUserInfo({ nameProfile, aboutProfile })
    .then((updatedUser) => {
     setCurrentUser(updatedUser);
     setIsLoading(false);
@@ -231,6 +232,27 @@ function App() {
   }
  }
 
+ useEffect(() => {
+  setNameProfile(currentUser && currentUser.name ? currentUser.name : '');
+  setAboutProfile(currentUser && currentUser.about ? currentUser.about : '');
+ }, [currentUser]);
+
+ const handleChangeNameProfile = (e) => {
+  setNameProfile(e.target.value);
+ };
+
+ const handleChangeAboutProfile = (e) => {
+  setAboutProfile(e.target.value);
+ };
+
+ const handleSubmitProfile = (e) => {
+  e.preventDefault();
+  handleUpdateUser({
+   nameProfile,
+   aboutProfile,
+  });
+ };
+
  return (
   <>
    <div className='root'>
@@ -252,15 +274,10 @@ function App() {
       isLoading={isLoading}
       refFormContainer={refFormContainer}
       refOverlay={refOverlay}
-      name={name}
-      about={about}
-      avatar={avatar}
-      currentUser={currentUser}
      />
      <EditProfilePopup
       isOpen={isEditProfilePopupOpen}
       onClose={closeAllPopups}
-      onUpdateUser={handleUpdateUser}
       refName={inputName}
       refJob={inputJob}
       refButtonElement={buttonElement}
@@ -270,6 +287,11 @@ function App() {
       validateInput={validateInput}
       refFormContainer={refFormContainer}
       refOverlay={refOverlay}
+      handleSubmitProfile={handleSubmitProfile}
+      handleChangeNameProfile={handleChangeNameProfile}
+      handleChangeAboutProfile={handleChangeAboutProfile}
+      nameProfile={nameProfile}
+      aboutProfile={aboutProfile}
      />
      <AddPlacepopup
       isOpen={isAddPlacePopupOpen}

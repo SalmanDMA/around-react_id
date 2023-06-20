@@ -14,14 +14,14 @@ export default function Main(props) {
     <div className='profile__avatar'>
      <div className='profile__edit-avatar' onClick={props.onEditAvatarClick}>
       <button type='button' aria-label='edit avatar' className='profile__button-avatar'></button>
-      <img alt='profile' className='profile__image' src={props.avatar} />
+      <img alt='profile' className='profile__image' src={avatar} />
      </div>
      <div className='profile__info'>
       <div className='profile__header'>
-       <h2 className='profile__title'>{props.name}</h2>
+       <h2 className='profile__title'>{name}</h2>
        <button className='hover-icon profile__edit' onClick={props.onEditProfileClick}></button>
       </div>
-      <p className='profile__text'>{props.about}</p>
+      <p className='profile__text'>{about}</p>
      </div>
     </div>
 
@@ -48,7 +48,7 @@ export default function Main(props) {
 
    <section className='card'>
     {props.cardList.map((card) => (
-     <Card key={card._id} card={card} onCardClick={() => props.onCardClick(card)} onCardDelete={() => props.onCardDeleteOpen(card)} onLikeClick={() => props.onLikeClick(card)} currentUser={props.currentUser} />
+     <Card key={card._id} card={card} onCardClick={() => props.onCardClick(card)} onCardDelete={() => props.onCardDeleteOpen(card)} onLikeClick={() => props.onLikeClick(card)} />
     ))}
    </section>
   </>

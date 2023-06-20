@@ -1,32 +1,9 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 
 export default function EditProfilePopup(props) {
- const [name, setName] = useState('');
- const [about, setAbout] = useState('');
  const currentUser = useContext(CurrentUserContext) || {};
-
- useEffect(() => {
-  setName(currentUser.name || '');
-  setAbout(currentUser.about || '');
- }, [currentUser]);
-
- const handleChangeName = (e) => {
-  setName(e.target.value);
- };
-
- const handleChangeAbout = (e) => {
-  setAbout(e.target.value);
- };
-
- const handleSubmit = (e) => {
-  e.preventDefault();
-  props.onUpdateUser({
-   name,
-   about,
-  });
- };
 
  return (
   <PopupWithForm
@@ -35,7 +12,7 @@ export default function EditProfilePopup(props) {
    title='Edit profile'
    name='form-edit'
    titleClass='form__header'
-   onSubmit={handleSubmit}
+   onSubmit={props.handleSubmitProfile}
    refFormElement={props.refFormElement}
    refFormContainer={props.refFormContainer}
    refOverlay={props.refOverlay}
@@ -45,9 +22,9 @@ export default function EditProfilePopup(props) {
     type='text'
     className='form__input form__name'
     name='inputName'
-    value={name}
+    value={props.nameProfile}
     onChange={() => props.validateInput(props.refName.current, props.refFormElement.current)}
-    onInput={handleChangeName}
+    onInput={props.handleChangeNameProfile}
     required
     minLength='2'
     maxLength='40'
@@ -60,9 +37,9 @@ export default function EditProfilePopup(props) {
     type='text'
     className='form__input form__job'
     name='inputJob'
-    value={about}
+    value={props.aboutProfile}
     onChange={() => props.validateInput(props.refJob.current, props.refFormElement.current)}
-    onInput={handleChangeAbout}
+    onInput={props.handleChangeAboutProfile}
     required
     minLength='2'
     maxLength='200'
