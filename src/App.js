@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import api from './utils/api';
 import EditAvatarPopup from './components/EditAvatarPopup';
@@ -24,7 +24,14 @@ function App() {
  const refFormAddPlaceElement = useRef();
  const refFormAvatarElement = useRef();
  const refFormProfileElement = useRef();
- const refFormContainer = useRef();
+ const refsContainerPopup = {
+  refFormContainerAvatarPopup: useRef(),
+  refFormContainerAddPlacePopup: useRef(),
+  refFormContainerImagePopup: useRef(),
+  refFormContainerConfirmPopup: useRef(),
+  refFormContainerEditProfilePopup: useRef(),
+ };
+
  const refOverlay = useRef();
  const [cardList, setCardList] = useState([]);
  const [deletingCard, setDeletingCard] = useState(null);
@@ -253,6 +260,40 @@ function App() {
   });
  };
 
+ const handleOverlayClick = (e) => {
+  if (
+   !(refsContainerPopup.refFormContainerAddPlacePopup.current && refsContainerPopup.refFormContainerAddPlacePopup.current.contains(e.target)) ||
+   !(refsContainerPopup.refFormContainerEditProfilePopup.current && refsContainerPopup.refFormContainerEditProfilePopup.current.contains(e.target)) ||
+   !(refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) ||
+   !(refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerConfirmPopup.current.contains(e.target)) ||
+   !(refsContainerPopup.refFormContainerImagePopup.current && refsContainerPopup.refFormContainerImagePopup.current.contains(e.target)) ||
+   refOverlay.current.contains(e.target)
+  ) {
+   return closeAllPopups();
+  }
+ };
+
+ const handleOverlayMouseOver = (e) => {
+  if (refsContainerPopup.refFormContainerAddPlacePopup.current && refsContainerPopup.refFormContainerAddPlacePopup.current.contains(e.target)) {
+   refOverlay.current.style.cursor = 'default';
+   refsContainerPopup.refFormContainerAddPlacePopup.current.style.cursor = 'default';
+  } else if (refsContainerPopup.refFormContainerEditProfilePopup.current && refsContainerPopup.refFormContainerEditProfilePopup.current.contains(e.target)) {
+   refOverlay.current.style.cursor = 'default';
+   refsContainerPopup.refFormContainerEditProfilePopup.current.style.cursor = 'default';
+  } else if (refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) {
+   refOverlay.current.style.cursor = 'default';
+   refsContainerPopup.refFormContainerAvatarPopup.current.style.cursor = 'default';
+  } else if (refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerConfirmPopup.current.contains(e.target)) {
+   refOverlay.current.style.cursor = 'default';
+   refsContainerPopup.refFormContainerConfirmPopup.current.style.cursor = 'default';
+  } else if (refsContainerPopup.refFormContainerImagePopup.current && refsContainerPopup.refFormContainerImagePopup.current.contains(e.target)) {
+   refOverlay.current.style.cursor = 'default';
+   refsContainerPopup.refFormContainerImagePopup.current.style.cursor = 'default';
+  } else {
+   refOverlay.current.style.cursor = 'pointer';
+  }
+ };
+
  return (
   <>
    <div className='root'>
@@ -272,7 +313,10 @@ function App() {
       selectedCard={selectedCard}
       isDeleteConfirmPopupOpen={isDeleteConfirmPopupOpen}
       isLoading={isLoading}
-      refFormContainer={refFormContainer}
+      refFormContainerImagePopup={refsContainerPopup.refFormContainerImagePopup}
+      refFormContainerConfirmPopup={refsContainerPopup.refFormContainerConfirmPopup}
+      handleOverlayClick={handleOverlayClick}
+      handleOverlayMouseOver={handleOverlayMouseOver}
       refOverlay={refOverlay}
      />
      <EditProfilePopup
@@ -285,13 +329,15 @@ function App() {
       refFormElement={refFormProfileElement}
       isLoading={isLoading}
       validateInput={validateInput}
-      refFormContainer={refFormContainer}
-      refOverlay={refOverlay}
       handleSubmitProfile={handleSubmitProfile}
       handleChangeNameProfile={handleChangeNameProfile}
       handleChangeAboutProfile={handleChangeAboutProfile}
       nameProfile={nameProfile}
       aboutProfile={aboutProfile}
+      refFormContainer={refsContainerPopup.refFormContainerEditProfilePopup}
+      refOverlay={refOverlay}
+      handleOverlayClick={handleOverlayClick}
+      handleOverlayMouseOver={handleOverlayMouseOver}
      />
      <AddPlacepopup
       isOpen={isAddPlacePopupOpen}
@@ -304,7 +350,9 @@ function App() {
       refFormElement={refFormAddPlaceElement}
       isLoading={isLoading}
       validateInput={validateInput}
-      refFormContainer={refFormContainer}
+      refFormContainer={refsContainerPopup.refFormContainerAddPlacePopup}
+      handleOverlayClick={handleOverlayClick}
+      handleOverlayMouseOver={handleOverlayMouseOver}
       refOverlay={refOverlay}
      />
      <EditAvatarPopup
@@ -317,8 +365,10 @@ function App() {
       refFormElement={refFormAvatarElement}
       isLoading={isLoading}
       validateInput={validateInput}
-      refFormContainer={refFormContainer}
+      refFormContainer={refsContainerPopup.refFormContainerAvatarPopup}
       refOverlay={refOverlay}
+      handleOverlayClick={handleOverlayClick}
+      handleOverlayMouseOver={handleOverlayMouseOver}
      />
      <Footer />
     </CurrentUserContext.Provider>

@@ -16,6 +16,8 @@ export default function EditProfilePopup(props) {
    refFormElement={props.refFormElement}
    refFormContainer={props.refFormContainer}
    refOverlay={props.refOverlay}
+   handleOverlayClick={props.handleOverlayClick}
+   handleOverlayMouseOver={props.handleOverlayMouseOver}
   >
    <input
     id='text-input'

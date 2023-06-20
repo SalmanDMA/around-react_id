@@ -36,15 +36,25 @@ export default function Main(props) {
     isOpen={props.isDeleteConfirmPopupOpen}
     onClose={props.onCloseAllPopups}
     titleClass='form-confirm-container__title'
-    refFormContainer={props.refFormContainer}
+    refFormContainer={props.refFormContainerConfirmPopup}
     refOverlay={props.refOverlay}
+    handleOverlayClick={props.handleOverlayClick}
+    handleOverlayMouseOver={props.handleOverlayMouseOver}
    >
     <button type='submit' className='form__button form-confirm-container__button hover-icon' aria-label='Ya' onClick={props.onDeleteCard}>
      {props.isLoading ? 'Deleting...' : 'Ya'}
     </button>
    </PopupWithForm>
 
-   <ImagePopup isOpen={props.selectedCard} card={props.selectedCard} onClose={props.onCloseAllPopups} refFormContainer={props.refFormContainer} refOverlay={props.refOverlay} />
+   <ImagePopup
+    isOpen={props.selectedCard}
+    card={props.selectedCard}
+    onClose={props.onCloseAllPopups}
+    refFormContainer={props.refFormContainerImagePopup}
+    refOverlay={props.refOverlay}
+    handleOverlayClick={props.handleOverlayClick}
+    handleOverlayMouseOver={props.handleOverlayMouseOver}
+   />
 
    <section className='card'>
     {props.cardList.map((card) => (
