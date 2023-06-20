@@ -262,11 +262,11 @@ function App() {
 
  const handleOverlayClick = (e) => {
   if (
-   !(refsContainerPopup.refFormContainerAddPlacePopup.current && refsContainerPopup.refFormContainerAddPlacePopup.current.contains(e.target)) ||
-   !(refsContainerPopup.refFormContainerEditProfilePopup.current && refsContainerPopup.refFormContainerEditProfilePopup.current.contains(e.target)) ||
-   !(refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) ||
-   !(refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerConfirmPopup.current.contains(e.target)) ||
-   !(refsContainerPopup.refFormContainerImagePopup.current && refsContainerPopup.refFormContainerImagePopup.current.contains(e.target)) ||
+   (!(refsContainerPopup.refFormContainerAddPlacePopup.current && refsContainerPopup.refFormContainerAddPlacePopup.current.contains(e.target)) &&
+    !(refsContainerPopup.refFormContainerEditProfilePopup.current && refsContainerPopup.refFormContainerEditProfilePopup.current.contains(e.target)) &&
+    !(refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) &&
+    !(refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerConfirmPopup.current.contains(e.target)) &&
+    !(refsContainerPopup.refFormContainerImagePopup.current && refsContainerPopup.refFormContainerImagePopup.current.contains(e.target))) ||
    refOverlay.current.contains(e.target)
   ) {
    return closeAllPopups();
