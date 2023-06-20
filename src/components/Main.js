@@ -48,7 +48,7 @@ export default function Main(props) {
 
    <section className='card'>
     {props.cardList.map((card) => (
-     <Card key={card._id} card={card} onCardClick={() => props.onCardClick(card)} onCardDelete={() => props.onCardDeleteOpen(card)} onLikeClick={() => props.onLikeClick(card)} />
+     <Card key={card._id} card={card} onCardClick={() => props.onCardClick(card)} onCardDelete={() => props.onCardDeleteOpen(card)} onLikeClick={() => props.onLikeClick(card)} currentUser={props.currentUser} />
     ))}
    </section>
   </>

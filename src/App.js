@@ -255,6 +255,7 @@ function App() {
       name={name}
       about={about}
       avatar={avatar}
+      currentUser={currentUser}
      />
      <EditProfilePopup
       isOpen={isEditProfilePopupOpen}
