@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { CurrentUserContext } from './contexts/CurrentUserContext';
 import api from './utils/api';
 import EditAvatarPopup from './components/EditAvatarPopup';
@@ -30,6 +30,12 @@ function App() {
  const [deletingCard, setDeletingCard] = useState(null);
  const [isLoading, setIsLoading] = useState(false);
  const [buttonDisabled, setButtonDisabled] = useState(false);
+ const { name, about, avatar } = currentUser || {};
+ // Membuat variabel untuk provider konteks
+ const currentUserProvider = {
+  currentUser,
+  setCurrentUser,
+ };
 
  useEffect(() => {
   const fetchUserInfo = async () => {
@@ -251,6 +257,9 @@ function App() {
       isLoading={isLoading}
       refFormContainer={refFormContainer}
       refOverlay={refOverlay}
+      name={name}
+      about={about}
+      avatar={avatar}
      />
      <EditProfilePopup
       isOpen={isEditProfilePopupOpen}

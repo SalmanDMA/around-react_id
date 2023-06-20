@@ -1,27 +1,22 @@
 import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
-import { useContext } from 'react';
 import Card from './Card';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Main(props) {
- const currentUser = useContext(CurrentUserContext) || {};
- const { name, about, avatar } = currentUser;
-
  return (
   <>
    <section className='profile'>
     <div className='profile__avatar'>
      <div className='profile__edit-avatar' onClick={props.onEditAvatarClick}>
       <button type='button' aria-label='edit avatar' className='profile__button-avatar'></button>
-      <img alt='profile' className='profile__image' src={avatar} />
+      <img alt='profile' className='profile__image' src={props.avatar} />
      </div>
      <div className='profile__info'>
       <div className='profile__header'>
-       <h2 className='profile__title'>{name}</h2>
+       <h2 className='profile__title'>{props.name}</h2>
        <button className='hover-icon profile__edit' onClick={props.onEditProfileClick}></button>
       </div>
-      <p className='profile__text'>{about}</p>
+      <p className='profile__text'>{props.about}</p>
      </div>
     </div>
 
