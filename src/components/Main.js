@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { useState, useContext } from 'react';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Main(props) {
  const currentUser = useContext(CurrentUserContext);
