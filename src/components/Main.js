@@ -10,26 +10,6 @@ export default function Main(props) {
 
  return (
   <>
-   <section className='profile'>
-    <div className='profile__avatar'>
-     <div className='profile__edit-avatar' onClick={props.onEditAvatarClick}>
-      <button type='button' aria-label='edit avatar' className='profile__button-avatar'></button>
-      <img alt='profile' className='profile__image' src={avatar} />
-     </div>
-     <div className='profile__info'>
-      <div className='profile__header'>
-       <h2 className='profile__title'>{name}</h2>
-       <button className='hover-icon profile__edit' onClick={props.onEditProfileClick}></button>
-      </div>
-      <p className='profile__text'>{about}</p>
-     </div>
-    </div>
-
-    <div className='profile__cta'>
-     <button className='profile__add hover-icon' onClick={props.onAddPlaceClick}></button>
-    </div>
-   </section>
-
    <PopupWithForm
     name='form-confirm-container'
     title='Apakah Anda Yakin ?'
@@ -55,6 +35,26 @@ export default function Main(props) {
     handleOverlayClick={props.handleOverlayClick}
     handleOverlayMouseOver={props.handleOverlayMouseOver}
    />
+
+   <section className='profile'>
+    <div className='profile__avatar'>
+     <div className='profile__edit-avatar' onClick={props.onEditAvatarClick}>
+      <button type='button' aria-label='edit avatar' className='profile__button-avatar'></button>
+      <img alt='profile' className='profile__image' src={avatar} />
+     </div>
+     <div className='profile__info'>
+      <div className='profile__header'>
+       <h2 className='profile__title'>{name}</h2>
+       <button className='hover-icon profile__edit' onClick={props.onEditProfileClick}></button>
+      </div>
+      <p className='profile__text'>{about}</p>
+     </div>
+    </div>
+
+    <div className='profile__cta'>
+     <button className='profile__add hover-icon' onClick={props.onAddPlaceClick}></button>
+    </div>
+   </section>
 
    <section className='card'>
     {props.cardList.map((card) => (
