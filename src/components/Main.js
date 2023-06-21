@@ -1,12 +1,11 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Main(props) {
- const currentUser = useContext(CurrentUserContext);
- const { name, about, avatar } = currentUser || {};
+ const { name, about, avatar } = props.currentUser || {};
 
  return (
   <>
