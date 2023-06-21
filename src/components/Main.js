@@ -1,5 +1,5 @@
-import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 import { useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
