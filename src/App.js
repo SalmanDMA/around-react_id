@@ -9,12 +9,37 @@ import EditAvatarPopup from './components/EditAvatarPopup';
 import Footer from './components/Footer';
 
 function App() {
- const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
- const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
- const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
- const [isDeleteConfirmPopupOpen, setisDeleteConfirmPopupOpen] = useState(false);
- const [selectedCard, setSelectedCard] = useState(null);
  const [currentUser, setCurrentUser] = useState(null);
+
+ useEffect(() => {
+  const fetchUserInfo = async () => {
+   try {
+    const userInfo = await api.getUserInfo();
+    setCurrentUser(userInfo);
+   } catch (error) {
+    console.log('Failed to fetch user info:', error);
+   }
+  };
+
+  fetchUserInfo();
+ }, []);
+
+ useEffect(() => {
+  api
+   .getInitialCards()
+   .then((cards) => {
+    setCardList(cards);
+   })
+   .catch((error) => {
+    console.log(error);
+   });
+ }, []);
+
+ useEffect(() => {
+  setNameProfile(currentUser && currentUser.name ? currentUser.name : '');
+  setAboutProfile(currentUser && currentUser.about ? currentUser.about : '');
+ }, [currentUser]);
+
  const avatarInputRef = useRef();
  const inputJudul = useRef();
  const inputTautanGambar = useRef();
@@ -31,8 +56,12 @@ function App() {
   refFormContainerConfirmPopup: useRef(),
   refFormContainerEditProfilePopup: useRef(),
  };
-
  const refOverlay = useRef();
+ const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+ const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+ const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+ const [isDeleteConfirmPopupOpen, setisDeleteConfirmPopupOpen] = useState(false);
+ const [selectedCard, setSelectedCard] = useState(null);
  const [cardList, setCardList] = useState([]);
  const [deletingCard, setDeletingCard] = useState(null);
  const [isLoading, setIsLoading] = useState(false);
@@ -40,46 +69,9 @@ function App() {
  const [nameProfile, setNameProfile] = useState('');
  const [aboutProfile, setAboutProfile] = useState('');
 
- useEffect(() => {
-  const fetchUserInfo = async () => {
-   try {
-    const userInfo = await api.getUserInfo();
-    setCurrentUser(userInfo);
-   } catch (error) {
-    console.log('Failed to fetch user info:', error);
-   }
-  };
-
-  fetchUserInfo();
- }, []);
-
- const handleEditAvatarClick = () => {
-  setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-  setButtonDisabled(true);
- };
-
  const handleEditProfileClick = () => {
   setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
   setButtonDisabled(true);
- };
-
- const handleAddPlaceClick = () => {
-  setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-  setButtonDisabled(true);
- };
-
- const handleCardClick = (card) => {
-  setSelectedCard(card);
- };
-
- const closeAllPopups = () => {
-  setIsEditAvatarPopupOpen(false);
-  setIsEditProfilePopupOpen(false);
-  setIsAddPlacePopupOpen(false);
-  setisDeleteConfirmPopupOpen(false);
-  setSelectedCard(null);
-
-  resetValuesPopupForm();
  };
 
  const handleUpdateUser = (userInfo) => {
@@ -97,38 +89,25 @@ function App() {
    });
  };
 
- const handleUpdateAvatar = (avatarInfo) => {
-  setIsLoading(true);
-  api
-   .patchAvatarUser(avatarInfo)
-   .then((updatedUser) => {
-    setCurrentUser(updatedUser);
-    avatarInputRef.current.value = '';
-    setIsLoading(false);
-    closeAllPopups();
-   })
-   .catch((error) => {
-    console.log(error);
-   });
+ const handleChangeNameProfile = (e) => {
+  setNameProfile(e.target.value);
  };
 
- const handleSubmitAvatar = (e) => {
+ const handleChangeAboutProfile = (e) => {
+  setAboutProfile(e.target.value);
+ };
+
+ const handleSubmitProfile = (e) => {
   e.preventDefault();
-  handleUpdateAvatar({
-   avatar: avatarInputRef.current.value,
+  handleUpdateUser({
+   nameProfile,
+   aboutProfile,
   });
  };
 
- useEffect(() => {
-  api
-   .getInitialCards()
-   .then((cards) => {
-    setCardList(cards);
-   })
-   .catch((error) => {
-    console.log(error);
-   });
- }, []);
+ const handleCardClick = (card) => {
+  setSelectedCard(card);
+ };
 
  const handleDeleteClick = () => {
   setisDeleteConfirmPopupOpen(!isDeleteConfirmPopupOpen);
@@ -197,6 +176,48 @@ function App() {
   });
  };
 
+ const handleAddPlaceClick = () => {
+  setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+  setButtonDisabled(true);
+ };
+
+ const handleEditAvatarClick = () => {
+  setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+  setButtonDisabled(true);
+ };
+
+ const handleUpdateAvatar = (avatarInfo) => {
+  setIsLoading(true);
+  api
+   .patchAvatarUser(avatarInfo)
+   .then((updatedUser) => {
+    setCurrentUser(updatedUser);
+    avatarInputRef.current.value = '';
+    setIsLoading(false);
+    closeAllPopups();
+   })
+   .catch((error) => {
+    console.log(error);
+   });
+ };
+
+ const handleSubmitAvatar = (e) => {
+  e.preventDefault();
+  handleUpdateAvatar({
+   avatar: avatarInputRef.current.value,
+  });
+ };
+
+ const closeAllPopups = () => {
+  setIsEditAvatarPopupOpen(false);
+  setIsEditProfilePopupOpen(false);
+  setIsAddPlacePopupOpen(false);
+  setisDeleteConfirmPopupOpen(false);
+  setSelectedCard(null);
+
+  resetValuesPopupForm();
+ };
+
  const resetValuesPopupForm = () => {
   inputJudul.current.value = '';
   inputTautanGambar.current.value = '';
@@ -238,27 +259,6 @@ function App() {
    }
   }
  }
-
- useEffect(() => {
-  setNameProfile(currentUser && currentUser.name ? currentUser.name : '');
-  setAboutProfile(currentUser && currentUser.about ? currentUser.about : '');
- }, [currentUser]);
-
- const handleChangeNameProfile = (e) => {
-  setNameProfile(e.target.value);
- };
-
- const handleChangeAboutProfile = (e) => {
-  setAboutProfile(e.target.value);
- };
-
- const handleSubmitProfile = (e) => {
-  e.preventDefault();
-  handleUpdateUser({
-   nameProfile,
-   aboutProfile,
-  });
- };
 
  const handleOverlayClick = (e) => {
   if (
