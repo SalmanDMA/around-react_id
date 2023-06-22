@@ -5,7 +5,8 @@ import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export default function Main(props) {
- const { name, about, avatar } = props.currentUser || {};
+ const currentUser = React.useContext(CurrentUserContext) || {};
+ const { name, about, avatar } = currentUser;
 
  return (
   <>
