@@ -264,11 +264,16 @@ function App() {
   if (
    (!(refsContainerPopup.refFormContainerAddPlacePopup.current && refsContainerPopup.refFormContainerAddPlacePopup.current.contains(e.target)) &&
     !(refsContainerPopup.refFormContainerEditProfilePopup.current && refsContainerPopup.refFormContainerEditProfilePopup.current.contains(e.target)) &&
-    !(refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) &&
-    !(refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerConfirmPopup.current.contains(e.target)) &&
+    !(refsContainerPopup.refFormContainerConfirmPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) &&
     !(refsContainerPopup.refFormContainerImagePopup.current && refsContainerPopup.refFormContainerImagePopup.current.contains(e.target))) ||
    refOverlay.current.contains(e.target)
   ) {
+   return closeAllPopups();
+  }
+ };
+
+ const handleOverlayClickOutside = (e) => {
+  if (!(refsContainerPopup.refFormContainerAvatarPopup.current && refsContainerPopup.refFormContainerAvatarPopup.current.contains(e.target)) && refOverlay.current.contains(e.target)) {
    return closeAllPopups();
   }
  };
@@ -368,7 +373,7 @@ function App() {
       validateInput={validateInput}
       refFormContainer={refsContainerPopup.refFormContainerAvatarPopup}
       refOverlay={refOverlay}
-      handleOverlayClick={handleOverlayClick}
+      handleOverlayClick={handleOverlayClickOutside}
       handleOverlayMouseOver={handleOverlayMouseOver}
      />
      <Footer />
