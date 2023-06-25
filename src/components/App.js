@@ -307,7 +307,6 @@ function App() {
      <Main
       onEditProfileClick={handleEditProfileClick}
       onAddPlaceClick={handleAddPlaceClick}
-      currentUser={currentUser}
       onEditAvatarClick={handleEditAvatarClick}
       onCloseAllPopups={closeAllPopups}
       onCardClick={handleCardClick}
